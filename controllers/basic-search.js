@@ -14,10 +14,18 @@ if(!apiKey) {
 }
 
 function basicSearch(words) {
-	
-	const searchRequests = words.map((word) => {	
+	// TODO: Check if only one word to search
+	const searchRequests = words.map((word) => {			
 		const apiUrl = `https://api.eniro.com/cs/search/basic?profile=${apiProfile}&key=${apiKey}&country=se&version=1.1.3&search_word=${word}`;
-		return request(apiUrl);
+
+		const options = {
+	    uri: apiUrl,
+	    headers: {
+	        'User-Agent': 'Request-Promise'
+	    },
+	    json: true // Automatically parses the JSON string in the response
+		};
+		return request(options);
 	});
 	return Promise.all(searchRequests);
 }

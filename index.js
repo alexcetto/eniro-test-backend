@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const debug = require('debug')('api');
 const bodyParser = require('body-parser');
 const basicSearch = require('./controllers/basic-search');
+const searchFields = require('./controllers/search-fields');
 
 
 const apiKey = process.env.APIKEY;
