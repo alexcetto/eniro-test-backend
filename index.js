@@ -29,9 +29,23 @@ dotenv.load();
 
 app.set('port', (process.env.PORT || 5000));
 
+app.set('view engine', 'ejs');
+
+// Serve static files
+app.use(express.static('public'))
+
 // Our basic route
 router.get('/', function(req, res) {
-  res.send('You are on the homepage');
+  res.redirect('/enirotest');
+});
+
+router.get('/enirotest', (req, res) => {
+	const allowedFilters = ['eniroId', 'companyInfo', 'address', 
+		'location', 'phoneNumbers', 'homepage', 
+		'facebook', 'companyReview', 'infoPageLink'];
+	res.render('pages/index', {
+		allowedFilters: allowedFilters
+	});
 });
 
 // This is the basic search. It returns all results with all fields for multiple keywords.
@@ -51,9 +65,22 @@ router.post('/search_fields', function(req, res) {
   	debug(err);
   	return res.status(500).send(err);
   });
-
 });
 
+router.post('/search_fields_view', function(req, res) {
+	const words = req.body.words.split(',');
+	const fields = req.body.fields.split(',');
+
+	debug(words, fields);
+
+  searchFields(words, fields).then(function(bodyResults) {
+  	return res.send(bodyResults);
+  }).catch(function(err) {
+  	debug(err);
+  	return res.status(500).send(err);
+  });
+
+});
 
 app.use('', router);
 

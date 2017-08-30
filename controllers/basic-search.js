@@ -15,6 +15,7 @@ if(!apiKey) {
 
 function basicSearch(words) {
 	// TODO: Check if only one word to search
+	// TODO Display all results, not just the firsts
 	const searchRequests = words.map((word) => {			
 		const apiUrl = `https://api.eniro.com/cs/search/basic?profile=${apiProfile}&key=${apiKey}&country=se&version=1.1.3&search_word=${word}`;
 

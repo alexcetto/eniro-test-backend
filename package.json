@@ -14,11 +14,10 @@
     "dotenv": "^4.0.0",
     "ejs": "^2.5.7",
     "express": "^4.15.4",
+    "request": "^2.81.0",
     "request-promise": "^4.2.1"
   },
-  "devDependencies": {
-
-  },
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/alexcetto/eniro-test-backend.git"
