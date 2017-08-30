@@ -52,10 +52,7 @@ router.post('/search_fields', function(req, res) {
   	return res.status(500).send(err);
   });
 
-  // return res.send(body);
 });
-
-
 
 
 app.use('', router);

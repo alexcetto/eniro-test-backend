@@ -15,20 +15,19 @@ if(!apiKey) {
 
 searchWithFields = function(words, fields) {
 	return basicSearch(words).then((results) => {
-		debug(results);
-		filterResults(results.adverts, fields);
+		return results.map((res) => {
+			return filterResults(res.adverts, fields);
+		}); 
 	});
 }
 
 function filterResults(results, fields) {
+	// TODO Check if filter is allowed
+	// TODO Check if only one filter
 	return results.map((result) => {
-		const filtered = Object.keys(result)
-			.filter(key => fields.includes(key))
-			.reduce((obj, key) => {
-			obj[key] = results[key];
-			return obj;
-		}, {});
-		debug(filtered);
+		return fields.map((singleField) => {
+			return result[singleField];
+		});
 	});
 }
 
