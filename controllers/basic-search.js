@@ -1,5 +1,5 @@
 const request = require('request-promise');
-const debug = require('debug')('controllers');
+const debug = require('debug')('basic-search');
 
 
 const apiKey = process.env.APIKEY;
@@ -14,20 +14,12 @@ if(!apiKey) {
 }
 
 function basicSearch(words) {
-	return new Promise(function(fulfill, reject) {
-		words.map(function(word) {
-			const apiUrl = `https://api.eniro.com/cs/search/basic?profile=${apiProfile}&key=${apiKey}&country=se&version=1.1.3&search_word=${word}`;
-			debug(apiUrl);
-			request(apiUrl)
-				.then(function(json) {
-					debug(json);
-					fulfill(json);
-				})
-				.catch(function(err) {
-					reject(err);
-				});
-		});
-	}); 
+	
+	const searchRequests = words.map((word) => {	
+		const apiUrl = `https://api.eniro.com/cs/search/basic?profile=${apiProfile}&key=${apiKey}&country=se&version=1.1.3&search_word=${word}`;
+		return request(apiUrl);
+	});
+	return Promise.all(searchRequests);
 }
 
 module.exports = basicSearch;

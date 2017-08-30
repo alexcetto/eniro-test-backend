@@ -2,7 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const debug = require('debug')('api');
 const bodyParser = require('body-parser');
-const controllers = require('./controllers');
+const basicSearch = require('./controllers/basic-search');
 
 
 const apiKey = process.env.APIKEY;
@@ -35,7 +35,16 @@ router.get('/', function(req, res) {
 
 // This is the basic search. It returns all results with all fields for multiple keywords.
 router.post('/basic_search', function(req, res) {
-  controllers(req.body.words).then(function(bodyResults) {
+  basicSearch(req.body.words).then(function(bodyResults) {
+  	return res.send(bodyResults);
+  }).catch(function(err) {
+  	debug(err);
+  	return res.status(500).send(err);
+  });
+});
+
+router.post('/search_fields', function(req, res) {
+  searchFields(req.body.words, req.body.fields).then(function(bodyResults) {
   	return res.send(bodyResults);
   }).catch(function(err) {
   	debug(err);
@@ -44,6 +53,8 @@ router.post('/basic_search', function(req, res) {
 
   // return res.send(body);
 });
+
+
 
 
 app.use('', router);
