@@ -1,0 +1,32 @@
+{
+  "name": "eniro-test-backend",
+  "version": "0.0.1",
+  "description": "Assignment from Eniro to assess my skills.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "nodemon": "nodemon index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "debug": "^3.0.1",
+    "dotenv": "^4.0.0",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
+    "request-promise": "^4.2.1"
+  },
+  "devDependencies": {
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexcetto/eniro-test-backend.git"
+  },
+  "author": "Alexandre Cetto <alexandrecetto@gmail.com>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/alexcetto/eniro-test-backend/issues"
+  },
+  "homepage": "https://github.com/alexcetto/eniro-test-backend#readme"
+}
