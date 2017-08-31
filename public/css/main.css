@@ -1,0 +1,23 @@
+html {
+	background: url(/images/jon-flobrant.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body {
+	background: none;
+}
+
+header {
+	background: rgba(255, 255, 255, .85);
+	padding: 1rem;
+	border-radius: .5rem;
+}
+
+main {
+	background: rgba(255, 255, 255, .85);
+	padding: 1rem;
+	border-radius: .5rem;
+}
