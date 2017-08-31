@@ -33,7 +33,8 @@ curl -X POST \
   http://localhost:5000/basic_search \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/x-www-form-urlencoded' \
-  -d 'words=pizza&words=kebab'```
+  -d 'words=pizza&words=kebab'
+  ```
 
 
 `/search_fields` which get the results for multiple words, **with** filtering.
@@ -43,7 +44,8 @@ curl -X POST \
   http://localhost:5000/search_fields \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/x-www-form-urlencoded' \
-  -d 'words=pizza&words=taxi&fields=companyInfo'```
+  -d 'words=pizza&words=taxi&fields=companyInfo'
+  ```
 
 ## Single page app
 
