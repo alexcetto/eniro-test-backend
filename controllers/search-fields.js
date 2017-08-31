@@ -1,6 +1,6 @@
 const request = require('request-promise');
 const debug = require('debug')('search-fields');
-const basicSearch = require('./basic-search')
+const basicSearch = require('./basic-search');
 
 const apiKey = process.env.APIKEY;
 const apiProfile = process.env.APIPROFILE;
@@ -13,17 +13,50 @@ if(!apiKey) {
 	process.exit(-1);
 }
 
+/**
+ * @param words {String[]} The keywords to search on Eniro
+ * @param fields {String[]} The fields to keep
+ * @return {Promise} with the results filtered
+ */
 searchWithFields = function(words, fields) {
-	return basicSearch(words).then((results) => {
-		return results.map((res) => {
-			return filterResults(res.adverts, fields);
-		}); 
-	});
+	// case if we have no word
+	if (!words) {
+		return Promise.reject('No word');
+	}
+	return basicSearch(words)
+		.then((results) => {
+			// If no results
+			if (results[0].totalHits == 0) {
+		  	return Promise.reject('No results');
+		  }
+			return results.map((res) => {
+				return filterResults(res.adverts, fields);
+			}); 
+		})
+		.catch((err) => {
+			debug(err);
+			return Promise.reject(err);
+		});
 }
 
+
+/**
+ * @param results {Object or Array of Objects} The hits from Eniro API
+ * @param fields {Array or String} The fields to filter
+ * @return {Objects[]} containing the results filtered (only the companies data)
+ */
 function filterResults(results, fields) {
-	// TODO Check if filter is allowed
-	// TODO Check if only one filter
+
+	const allowedFilters = ['eniroId', 'companyInfo', 'address', 
+    'location', 'phoneNumbers', 'homepage', 
+    'facebook', 'companyReview', 'infoPageLink'];
+
+  if (!fields) {
+  	return results;
+  } else if(typeof fields === 'string') {
+  	fields = [fields];
+  }
+
 	return results.map((result) => {
 		return fields.map((singleField) => {
 			return result[singleField];

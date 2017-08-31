@@ -13,9 +13,22 @@ if(!apiKey) {
 	process.exit(-1);
 }
 
+/**
+ * Search against the Eniro API using one or multiple words
+ * @param words {array} The terms to search on Eniro API
+ * @return {Promise} the results in a Promise
+ */
 function basicSearch(words) {
-	// TODO: Check if only one word to search
 	// TODO Display all results, not just the firsts
+
+	if (typeof words === 'undefined') {
+		return Promise.reject('No word');
+	}
+
+	// only one word, we want an array for Promise.all
+	if (typeof words === 'string') {
+		words = [words];
+	}
 	const searchRequests = words.map((word) => {			
 		const apiUrl = `https://api.eniro.com/cs/search/basic?profile=${apiProfile}&key=${apiKey}&country=se&version=1.1.3&search_word=${word}`;
 
@@ -29,6 +42,7 @@ function basicSearch(words) {
 		return request(options);
 	});
 	return Promise.all(searchRequests);
+	
 }
 
 module.exports = basicSearch;
