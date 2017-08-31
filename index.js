@@ -51,13 +51,11 @@ router.get('/enirotest', (req, res) => {
 });
 
 // This is the basic search. It returns all results with all fields for multiple keywords.
-router.post('/basic_search', function(req, res) {
-  debug(req.body);
+router.post('/basic_search', (req, res) => {
   if(req.body.constructor === Object && Object.keys(req.body).length === 0) {
     return res.status(400).send('No keywords');
   }
-  basicSearch(req.body.words).then(function(bodyResults) {
-    debug('bodyresults:',bodyResults)
+  basicSearch(req.body.words).then((bodyResults) => {
   	return res.send(bodyResults);
   }).catch(function(err) {
   	debug(err);
@@ -71,7 +69,6 @@ router.post('/search_fields', function(req, res) {
     return res.status(400).send('No data');
   }
   searchFields(req.body.words, req.body.fields).then(function(bodyResults) {
-    debug(req.body);
   	return res.send(bodyResults);
   }).catch(function(err) {
   	debug(err);
@@ -85,8 +82,6 @@ router.post('/search_fields_view', function(req, res) {
 	const words = req.body.words.split(',');
 	const fields = req.body.fields.split(',');
 
-	debug(words, fields);
-
   if(req.body.constructor === Object && Object.keys(req.body).length === 0) {
     return res.status(400).send('No data');
   }
@@ -97,7 +92,6 @@ router.post('/search_fields_view', function(req, res) {
   	debug(err);
   	return res.status(500).send(err);
   });
-
 });
 
 app.use('', router);

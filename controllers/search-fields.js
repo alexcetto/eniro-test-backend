@@ -18,7 +18,7 @@ if(!apiKey) {
  * @param fields {String[]} The fields to keep
  * @return {Promise} with the results filtered
  */
-searchWithFields = function(words, fields) {
+searchWithFields = (words, fields) => {
 	// case if we have no word
 	if (!words) {
 		return Promise.reject('No word');

@@ -2,13 +2,15 @@
 
 This project is an assignment assessing my skills.
 
-## Run it
+This project was developed using node v8.4 and npm v5.3.
 
-To run this project, use `npm install` to install dependancies then `npm start`.
+## Install
+
+To run this project, use `npm install` to install dependancies.
 
 ## ENV
 
-The project uses ENV vars.
+The project uses ENV vars to configure the project.
 
 List: 
 
@@ -22,14 +24,36 @@ Example:
 
 ## Search a keyword
 
-To use the basic search, perform a POST on localhost:5000/basic_search. I tested a x-www-form-urlencoded request.
+Two routes are available to request:
 
-This project was developed using node v8.4 and npm v5.3.
+`/basic_search` which get the results for multiple words, **without** filtering.
+
+```bash
+curl -X POST \
+  http://localhost:5000/basic_search \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/x-www-form-urlencoded' \
+  -d 'words=pizza&words=kebab'```
+
+
+`/search_fields` which get the results for multiple words, **with** filtering.
+
+```bash
+curl -X POST \
+  http://localhost:5000/search_fields \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/x-www-form-urlencoded' \
+  -d 'words=pizza&words=taxi&fields=companyInfo'```
 
 ## Single page app
 
-Open a browser and go to http://localhost:5000/enirotest or http://localhost:5000/ the request webapp for the API.
+Open a browser and go to http://localhost:5000/enirotest or http://localhost:5000/ to access the webapp for the API.
 
-This page was done using ejs. I am used to Angular but it seemed a little overkill for the page goal.
+This page was done using ejs. I am used to Angular but it seemed a little overkill for the page goal so I settled for ejs. I never used it before but it is pretty cool.
 
 As you will see, the style is pretty basic but functional.
+
+## Time spent
+
+- 30/08: 7 hours
+- 31/08: 4 hours

@@ -1,7 +1,6 @@
 const request = require('request-promise');
 const debug = require('debug')('basic-search');
 
-
 const apiKey = process.env.APIKEY;
 const apiProfile = process.env.APIPROFILE;
 // Check if user has his keys set up
